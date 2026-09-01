@@ -1,0 +1,26 @@
+#include "corne.dtsi"
+
+&pro_micro_i2c {
+    status = "okay";
+
+    trackpad: glidepoint@2a {
+        compatible = "cirque,pinnacle";
+        reg = <0x2a>;
+        status = "okay";
+        /* DR must be wired to a free GPIO; pin 1 avoids matrix row pin 5 on Corne */
+        dr-gpios = <&pro_micro 1 (GPIO_ACTIVE_HIGH)>;
+        sensitivity = "4x";
+        rotate-90;
+        x-invert;
+        y-invert;
+        sleep;
+    };
+};
+
+&trackpad_split {
+    device = <&trackpad>;
+};
+
+&oled {
+    status = "disabled";
+};
