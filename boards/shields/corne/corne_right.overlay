@@ -1,4 +1,23 @@
-#include "corne.dtsi"
+#include "corne_trackpad.dtsi"
+
+&default_transform {
+    col-offset = <6>;
+};
+
+&five_column_transform {
+    col-offset = <6>;
+};
+
+&kscan0 {
+    col-gpios
+        = <&pro_micro 14 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 15 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 18 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 19 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 20 GPIO_ACTIVE_HIGH>
+        , <&pro_micro 21 GPIO_ACTIVE_HIGH>
+        ;
+};
 
 &pro_micro_i2c {
     status = "okay";
@@ -7,13 +26,12 @@
         compatible = "cirque,pinnacle";
         reg = <0x2a>;
         status = "okay";
-        /* DR must be wired to a free GPIO; pin 1 avoids matrix row pin 5 on Corne */
+        /* Wire trackpad DR to Pro Micro pin 1 (D1). Required for ZMK. */
         dr-gpios = <&pro_micro 1 (GPIO_ACTIVE_HIGH)>;
         sensitivity = "4x";
         rotate-90;
         x-invert;
         y-invert;
-        sleep;
     };
 };
 
