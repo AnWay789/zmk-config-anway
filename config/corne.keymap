@@ -71,11 +71,11 @@
                 cal_layer {
                         display-name = "CAL";
 // Enter: Lower+Raise together, or Raise + '.
-// Right home row: H = -5°, J = +5°, K = reset, L = exit
+// Right home: H/J tilt, N/M speed, K reset, L exit
                         bindings = <
    &trans &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans
    &trans &trans &trans &trans &trans &trans   &tp_rot TP_TILT_CCW &tp_rot TP_TILT_CW &tp_rot TP_TILT_RST &to 0 &trans &trans
-   &trans &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans
+   &trans &trans &trans &trans &trans &trans   &tp_rot TP_SPD_DN &tp_rot TP_SPD_UP &trans &trans &trans &trans
                   &trans &trans &trans   &trans &to 0 &trans
                         >;
                 };

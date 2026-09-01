@@ -37,14 +37,19 @@ struct cal_widget {
     lv_obj_t *obj;
 };
 
-static void set_cal_text(lv_obj_t *label, int16_t a) {
-    int16_t signed_a = a;
+typedef struct {
+    int16_t angle;
+    int16_t speed;
+} cal_ui_state_t;
+
+static void set_cal_text(lv_obj_t *label, cal_ui_state_t st) {
+    int16_t signed_a = st.angle;
     if (signed_a > 180) {
         signed_a -= 360;
     }
     /* 32px OLED: number + 8-way tick instead of a tiny unreadble compass. */
     const char *dir = ">";
-    int16_t q = ((a + 22) % 360) / 45;
+    int16_t q = ((st.angle + 22) % 360) / 45;
     switch (q) {
     case 0:
         dir = ">";
@@ -71,25 +76,25 @@ static void set_cal_text(lv_obj_t *label, int16_t a) {
         dir = "\\";
         break;
     }
-    char text[16];
-    snprintf(text, sizeof(text), "(%s)%+d", dir, signed_a);
+    char text[20];
+    snprintf(text, sizeof(text), "%s%+d %d", dir, signed_a, st.speed);
     lv_label_set_text(label, text);
 }
 
-static void cal_update_cb(int16_t a) {
+static void cal_update_cb(cal_ui_state_t st) {
     struct cal_widget *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&cal_widgets, widget, node) { set_cal_text(widget->obj, a); }
+    SYS_SLIST_FOR_EACH_CONTAINER(&cal_widgets, widget, node) { set_cal_text(widget->obj, st); }
 }
 
-static int16_t cal_get_state(const zmk_event_t *eh) {
+static cal_ui_state_t cal_get_state(const zmk_event_t *eh) {
     const struct zmk_trackpad_cal_state_changed *ev = as_zmk_trackpad_cal_state_changed(eh);
     if (ev != NULL) {
-        return ev->angle;
+        return (cal_ui_state_t){.angle = ev->angle, .speed = ev->speed};
     }
-    return trackpad_cal_get_angle();
+    return (cal_ui_state_t){.angle = trackpad_cal_get_angle(), .speed = trackpad_cal_get_speed()};
 }
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_trackpad_cal, int16_t, cal_update_cb, cal_get_state)
+ZMK_DISPLAY_WIDGET_LISTENER(widget_trackpad_cal, cal_ui_state_t, cal_update_cb, cal_get_state)
 ZMK_SUBSCRIPTION(widget_trackpad_cal, zmk_trackpad_cal_state_changed);
 
 static struct cal_widget cal_status_widget;

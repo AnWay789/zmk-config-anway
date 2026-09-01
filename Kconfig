@@ -11,6 +11,13 @@ config TRACKPAD_CAL_DEFAULT_ANGLE
 	help
 	  Extra tilt after Cirque rotate-90. 335 = -25 degrees.
 
+config TRACKPAD_CAL_DEFAULT_SPEED
+	int
+	default 100
+	range 25 400
+	help
+	  Cursor speed percent. 100 = 1.0x.
+
 if ZMK_DISPLAY && ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
 
 config LV_FONT_MONTSERRAT_16
