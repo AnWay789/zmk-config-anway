@@ -26,8 +26,8 @@
         compatible = "cirque,pinnacle";
         reg = <0x2a>;
         status = "okay";
-        /* Wire trackpad DR to Pro Micro pin 1 (D1). Required for ZMK. */
-        dr-gpios = <&pro_micro 1 (GPIO_ACTIVE_HIGH)>;
+        /* Wire trackpad FFC pin 4 (DR) to PCB label B4/8 on the right half. */
+        dr-gpios = <&pro_micro 8 (GPIO_ACTIVE_HIGH)>;
         sensitivity = "4x";
         rotate-90;
         x-invert;
