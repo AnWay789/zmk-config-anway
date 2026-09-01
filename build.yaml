@@ -25,12 +25,8 @@ include:
     shield: corne_right
   - board: nice_nano_v2
     shield: settings_reset
-  # Debug builds with USB serial logging (flash *_log.uf2 to read logs via tio)
+  # USB logging only works on the central (left) half
   - board: nice_nano_v2
     shield: corne_left
     snippet: zmk-usb-logging
     artifact-name: corne_left_log
-  - board: nice_nano_v2
-    shield: corne_right
-    snippet: zmk-usb-logging
-    artifact-name: corne_right_log
