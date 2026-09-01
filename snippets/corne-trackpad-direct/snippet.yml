@@ -1,0 +1,4 @@
+name: corne-trackpad-direct
+append:
+  EXTRA_DTC_OVERLAY_FILE: corne-trackpad-direct.overlay
+  EXTRA_CONF_FILE: corne-trackpad-direct.conf

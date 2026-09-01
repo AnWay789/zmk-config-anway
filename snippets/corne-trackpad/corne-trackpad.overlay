@@ -1,26 +1,6 @@
 #include "corne_trackpad.dtsi"
-
-&pro_micro_i2c {
-    status = "okay";
-    clock-frequency = <100000>;
-
-    trackpad: glidepoint@2a {
-        compatible = "cirque,pinnacle";
-        reg = <0x2a>;
-        status = "okay";
-        /* Wire trackpad FFC pin 4 (DR) to PCB label B4/8 on the right half. */
-        dr-gpios = <&pro_micro 8 (GPIO_ACTIVE_HIGH)>;
-        sensitivity = "4x";
-        rotate-90;
-        x-invert;
-        y-invert;
-    };
-};
+#include "cirque-i2c.dtsi"
 
 &trackpad_split {
     device = <&trackpad>;
-};
-
-&oled {
-    status = "disabled";
 };

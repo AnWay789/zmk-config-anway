@@ -1,0 +1,9 @@
+#include "../corne-trackpad/cirque-i2c.dtsi"
+
+/ {
+    /* Direct HID mouse — no split. Flash this LEFT firmware onto the RIGHT MCU. */
+    trackpad_direct_listener: trackpad_direct_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackpad>;
+    };
+};

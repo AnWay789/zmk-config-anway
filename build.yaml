@@ -24,12 +24,12 @@ include:
   - board: nice_nano_v2
     shield: corne_right
     snippet: corne-trackpad
-  # Standalone USB test: flash RIGHT half only, disable split, press OUT_USB.
+  # Real hardware test: LEFT (USB/HID) firmware + trackpad, flash onto the RIGHT MCU.
+  # Plug that half into Mac USB, press OUT_USB, move on the pad.
   - board: nice_nano_v2
-    shield: corne_right
-    snippet: corne-trackpad-usb-test
-    cmake-args: -DCONFIG_ZMK_SPLIT=n -DCONFIG_ZMK_USB=y
-    artifact-name: corne_right_trackpad_usb_test
+    shield: corne_left
+    snippet: corne-trackpad-direct
+    artifact-name: corne_right_hw_test
   - board: nice_nano_v2
     shield: settings_reset
   # USB logging only works on the central (left) half
