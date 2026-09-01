@@ -1,6 +1,8 @@
 config TRACKPAD_CAL
 	bool
 	default y
+	select LV_USE_LABEL if ZMK_DISPLAY
+	imply LV_USE_THEME_MONO if ZMK_DISPLAY
 
 config TRACKPAD_CAL_DEFAULT_ANGLE
 	int
@@ -8,3 +10,16 @@ config TRACKPAD_CAL_DEFAULT_ANGLE
 	range 0 359
 	help
 	  Extra tilt after Cirque rotate-90. 335 = -25 degrees.
+
+if ZMK_DISPLAY && ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+
+config LV_FONT_MONTSERRAT_16
+	default y
+
+config LV_FONT_MONTSERRAT_12
+	default y
+
+config LV_Z_MEM_POOL_SIZE
+	default 4096
+
+endif
