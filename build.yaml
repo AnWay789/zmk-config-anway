@@ -24,11 +24,12 @@ include:
   - board: nice_nano_v2
     shield: corne_right
     snippet: corne-trackpad
-  # Real hardware test: LEFT (USB/HID) firmware + trackpad, flash onto the RIGHT MCU.
-  # Plug that half into Mac USB, press OUT_USB, move on the pad.
+  # Hardware test: RIGHT PCB as a standalone USB keyboard+mouse (no split).
+  # Flash onto the RIGHT half only. Plug that half into Mac USB.
   - board: nice_nano_v2
-    shield: corne_left
+    shield: corne_right
     snippet: corne-trackpad-direct
+    cmake-args: -DCONFIG_ZMK_SPLIT=n -DCONFIG_ZMK_USB=y
     artifact-name: corne_right_hw_test
   - board: nice_nano_v2
     shield: settings_reset
