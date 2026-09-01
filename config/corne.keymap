@@ -55,3 +55,52 @@
         };
 };
 
+from datetime import date, datetime
+from django.db import transaction
+from django.utils import timezone
+from order.models import Order
+
+
+ORDER_IDS = [
+    4682654,4684472,4691522,4692007,4693000
+]
+
+NEW_DELIVERY_DATE = date(2026, 9, 2)
+DRY_RUN = True  # False — применить изменения
+
+def build_new_delivery_datetime(order):
+    tz = timezone.get_current_timezone()
+    current = order.delivery_date
+    if timezone.is_naive(current):
+        current = timezone.make_aware(current, tz)
+    current_local = current.astimezone(tz)
+    new_dt = datetime.combine(NEW_DELIVERY_DATE, current_local.time())
+    return timezone.make_aware(new_dt, tz)
+
+updated = []
+not_found = []
+
+with transaction.atomic():
+    for order_id in ORDER_IDS:
+        order = Order.objects.filter(pk=order_id).first()
+        if order is None:
+            not_found.append(order_id)
+            continue
+
+        new_delivery_date = build_new_delivery_datetime(order)
+        old_delivery_date = order.delivery_date
+
+        print(f'id={order.id} | {order.marketplace_number} | {old_delivery_date} -> {new_delivery_date}')
+
+        if not DRY_RUN:
+            order.delivery_date = new_delivery_date
+            order.save(update_fields=['delivery_date'])
+
+        updated.append(order_id)
+
+    if DRY_RUN:
+        transaction.set_rollback(True)
+
+print(f'Обновлено: {len(updated)}')
+print(f'Не найдено: {len(not_found)}')
+print('not_found =', not_found)
