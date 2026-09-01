@@ -31,7 +31,10 @@
         status = "okay";
         /* DR wired to Pro Micro pin 8 / silkscreen B4 on the right half. */
         dr-gpios = <&pro_micro 8 (GPIO_ACTIVE_HIGH)>;
-        sensitivity = "4x";
+        /* 1x = least ADC attenuation = longest detection range. 4x is the opposite. */
+        sensitivity = "1x";
+        x-axis-z-min = <1>;
+        y-axis-z-min = <1>;
         rotate-90;
         x-invert;
         y-invert;
