@@ -1,0 +1,10 @@
+config TRACKPAD_CAL
+	bool
+	default y
+
+config TRACKPAD_CAL_DEFAULT_ANGLE
+	int
+	default 335
+	range 0 359
+	help
+	  Extra tilt after Cirque rotate-90. 335 = -25 degrees.

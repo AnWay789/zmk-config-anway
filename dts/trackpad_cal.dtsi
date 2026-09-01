@@ -1,0 +1,15 @@
+/ {
+    behaviors {
+        tp_rot: tp_rot {
+            compatible = "zmk,behavior-trackpad-rotate";
+            #binding-cells = <1>;
+        };
+    };
+
+    input_processors {
+        tp_tilt: tp_tilt {
+            compatible = "zmk,input-processor-trackpad-rotate";
+            #input-processor-cells = <0>;
+        };
+    };
+};

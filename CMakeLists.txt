@@ -1,0 +1,3 @@
+target_sources(app PRIVATE src/trackpad_cal.c)
+target_sources_ifdef(CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM app PRIVATE src/trackpad_cal_screen.c)
+zephyr_include_directories(include)

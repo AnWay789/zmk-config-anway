@@ -1,9 +1,10 @@
 #include "../corne-trackpad/cirque-i2c.dtsi"
+#include <trackpad_cal.dtsi>
 
 / {
-    /* Direct HID mouse on this MCU. No split. */
     trackpad_direct_listener: trackpad_direct_listener {
         compatible = "zmk,input-listener";
         device = <&trackpad>;
+        input-processors = <&tp_tilt>;
     };
 };

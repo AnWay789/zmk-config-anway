@@ -1,0 +1,11 @@
+description: Runtime XY rotation for the trackpad
+
+compatible: "zmk,input-processor-trackpad-rotate"
+
+properties:
+  "#input-processor-cells":
+    type: int
+    required: true
+    const: 0
+  track-remainders:
+    type: boolean

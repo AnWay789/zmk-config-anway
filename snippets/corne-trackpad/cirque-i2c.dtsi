@@ -35,7 +35,7 @@
         sensitivity = "1x";
         x-axis-z-min = <1>;
         y-axis-z-min = <1>;
-        /* No rotate/invert until both axes work; add back after we see native X/Y. */
+        rotate-90;
     };
 };
 

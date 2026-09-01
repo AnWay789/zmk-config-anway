@@ -1,0 +1,12 @@
+description: Adjust extra trackpad tilt in degrees (0 = reset)
+
+compatible: "zmk,behavior-trackpad-rotate"
+
+properties:
+  "#binding-cells":
+    type: int
+    required: true
+    const: 1
+
+binding-cells:
+  - param1

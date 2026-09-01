@@ -1,3 +1,5 @@
+#include <trackpad_cal.dtsi>
+
 / {
     split_inputs {
         #address-cells = <1>;
@@ -13,5 +15,6 @@
         compatible = "zmk,input-listener";
         status = "disabled";
         device = <&trackpad_split>;
+        input-processors = <&tp_tilt>;
     };
 };
